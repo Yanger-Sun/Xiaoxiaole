@@ -1,0 +1,99 @@
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: 160px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    html {
+        font-size: 125px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 120px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    html {
+        font-size: 100px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    html {
+        font-size: 93.75px;
+    }
+}
+
+@media screen and (max-width: 414px) {
+    html {
+        font-size: 64.6875px;
+    }
+}
+
+@media screen and (max-width: 412px) {
+    html {
+        font-size: 64.375px;
+    }
+}
+
+@media screen and (max-width: 393px) {
+    html {
+        font-size: 61.40625px; } }
+
+@media screen and (max-width: 384px) {
+    html {
+        font-size: 60px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    html {
+        font-size: 58.59375px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    html {
+        font-size: 56.25px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    html {
+        font-size: 50px;
+    }
+}
+
+*{
+    padding:0;
+    margin:0;
+}
+body{
+     width:100vw;
+     height:100vh;
+     background: url("../image/xxlbj.jpg") top center no-repeat;
+     background-size: cover;
+ }
+.title{
+    width:80%;
+    height:0.5rem;
+    background: #edf165;
+    position: absolute;
+    top:0.96rem;
+    left:0.34rem;
+    text-align: center;
+    font-size: 0.3rem;
+    line-height: 0.5rem;
+}
+.canvasBox{
+    width:94vw;
+    height:94vw;
+    position: absolute;
+    top:43.4vw;
+    left:2.81vw;
+    background-size: cover;
+}

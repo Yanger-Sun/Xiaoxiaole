@@ -15,11 +15,92 @@
     <link rel="stylesheet" href="css/index.css?time=20170324">
 </head>
 <body>
-    <div class="title">当前点击的坐标为：Y:<span class="Y"></span>&nbsp;X:<span class="X"></span></div>
+
     <div class="canvasBox">
         <canvas class="canvas" ></canvas>
     </div>
     <script src="js/jquery.js"></script>
     <script src="js/index.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+    <script language="javascript">
+        $(function(){
+
+            var url = "https://Yanger-Sun.github.io/Xiaoxiaole";
+
+            jQuery.getScript(url,  function(res){
+                wx.config({
+
+                    debug: false,//如果在测试环境可以设置为true，会在控制台输出分享信息； //开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId:data.appId, // 必填，公众号的唯一标识
+                    timestamp:data.timestamp , // 必填，生成签名的时间戳
+                    nonceStr:data.nonceStr, // 必填，生成签名的随机串
+                    signature:data.signature,// 必填
+                    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','hideMenuItems','hideAllNonBaseMenuItem','startRecord','stopRecord','playVoice'] // 必填
+                });
+
+            })
+
+
+            var _param = {
+                title : "小样的消消乐",// 分享标题
+                link : location.href,// 分享链接
+                imgUrl : "image/timg.jpg",// 分享图标
+                desc : "勿喷，不是一点小low,。",// 分享描述,分享给朋友时用
+                type : "",// 分享类型,music、video或link，不填默认为link,分享给朋友时用
+                dataUrl : "", // 如果type是music或video，则要提供数据链接，默认为空,分享给朋友时用
+                //分享回调
+            }
+            wx.ready(function(res){
+                //	wx.hideAllNonBaseMenuItem();
+
+                wx.hideMenuItems({
+                    menuList: ['menuItem:copyUrl','menuItem:openWithSafari','menuItem:share:brand'] // 要隐藏的菜单项，所有menu项见附录3
+                });
+                //校验分享接口是否可用
+                wx.checkJsApi({
+                    jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage','hideMenuItems'],
+                    success: function(res) {
+                        if((res.checkResult.onMenuShareTimeline=!!false) || (res.checkResult.onMenuShareAppMessage=!!false)){
+                            return false;
+                        }
+                    }
+                });
+                //分享到朋友圈
+                wx.onMenuShareTimeline({
+                    title : _param.title,
+                    link : _param.link,
+                    imgUrl : _param.imgUrl,
+                    success : function (res) {
+                        // 用户确认分享后执行的回调函数
+                        _param.calback();
+
+                    },
+                    cancel: function (res) {
+
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+                //分享给朋友
+                wx.onMenuShareAppMessage({
+                    title : _param.title,
+                    desc : _param.desc,
+                    link : _param.link,
+                    imgUrl : _param.imgUrl,
+                    type : _param.type,
+                    dataUrl : _param.dataUrl,
+                    success : function (res) {
+                        // 用户确认分享后执行的回调函数
+                        _param.calback();
+
+
+                    },
+                    cancel: function (res) {
+
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

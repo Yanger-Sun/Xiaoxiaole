@@ -17,6 +17,8 @@ $(function(){
         var squreBox = [];
         var squreW;
         var squreH;
+        var canLeft;
+        var canTop;
         //±³¾°Êý×é
         var bj=["image/cake_1.png","image/cake_2.png","image/cake_3.png","image/cake_4.png","image/cake_5.png","image/cake_6.png","image/cake_7.png"];
         var col = 7;
@@ -190,10 +192,11 @@ $(function(){
        $.each(squreBox,function(i,v){
            var squre = v;
            if(squre.state == 1){
-               var changeArr = checkSqure(squre,col);
+               var changeArr = checkSqure(squre);
                if(changeArr.length > 0){
                    changeArr.push(v);
                    changeState(changeArr);
+                   clearTimeout(t);
                    var t =setTimeout(drap,1000);
                }else{
                    return;
@@ -309,32 +312,37 @@ $(function(){
         }
         timer();
 
-        $("canvas").on("click",function(e){
-            if(clickFlag == false){
-                clickFlag = true;
-                prevY = Math.floor(e.offsetX / squreW);
-                prevX = Math.floor(e.offsetY / squreH);
-            }else if(clickFlag){
-                var nowY = Math.floor(e.offsetX / squreW);
-                var nowX = Math.floor(e.offsetY / squreH);
-                if((nowY == prevY && Math.abs(nowX - prevX)==1) || (nowX == prevX && Math.abs(nowY - prevY)==1)){
-                    var prevSqure = $.grep(squreBox,function(v){
-                        return v.x == prevX && v.y == prevY;
-                    });
-                    var nowSqure = $.grep(squreBox,function(v){
-                        return v.x == nowX && v.y == nowY;
-                    });
-                    var temp = prevSqure[0].bj;
-                    var nowBj = nowSqure[0].bj;
-                    squreBox[prevSqure[0].id].bj = squreBox[nowSqure[0].id].bj;
-                    squreBox[nowSqure[0].id].bj = temp;
-                    draw();
-                    check();
-                    clickFlag = false;
-                }else{
-                    clickFlag = false;
-                }
-            }
+        $("canvas").on("touchstart",function(event){
+            var touchX = event.originalEvent.changedTouches[0].clientX
+            var touchY = event.originalEvent.changedTouches[0].clientY;
+            canLeft = $("canvas").offset().left;
+            canTop = $("canvas").offset().top;
+            prevY = Math.floor((touchX - canLeft)/squreW);
+            prevX = Math.floor((touchY - canTop)/squreH);
         })
-    
+        $("canvas").on("touchend",function(event){
+            var touchX = event.originalEvent.changedTouches[0].clientX
+            var touchY = event.originalEvent.changedTouches[0].clientY;
+            canLeft = $("canvas").offset().left;
+            canTop = $("canvas").offset().top;
+            var nowY = Math.floor((touchX - canLeft)/squreW);
+            var nowX = Math.floor((touchY - canTop)/squreH);
+            console.log(nowX,nowY,prevX,prevY)
+            if((nowY == prevY && Math.abs(nowX - prevX)==1) || (nowX == prevX && Math.abs(nowY - prevY)==1)){
+                            var prevSqure = $.grep(squreBox,function(v){
+                                return v.x == prevX && v.y == prevY;
+                            });
+                            var nowSqure = $.grep(squreBox,function(v){
+                                return v.x == nowX && v.y == nowY;
+                            });
+                            var temp = prevSqure[0].bj;
+                            var nowBj = nowSqure[0].bj;
+                            squreBox[prevSqure[0].id].bj = squreBox[nowSqure[0].id].bj;
+                            squreBox[nowSqure[0].id].bj = temp;
+                            draw();
+                        }else{
+                            prevX = "";
+                            prevY = "";
+                        }
+        })
 });

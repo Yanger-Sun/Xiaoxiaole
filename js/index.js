@@ -1,14 +1,14 @@
 /**
  * Created by Administrator on 2017/4/1.
  */
-//Ò³Ãæ¼ÓÔØÇ°  ¸øcanvas¿í¸ßÎª¸¸ÔªËØµÄ¿í¸ß£»
+//é¡µé¢åŠ è½½å‰  ç»™canvaså®½é«˜ä¸ºçˆ¶å…ƒç´ çš„å®½é«˜ï¼›
 $(window).ready(function () {
     $("canvas").attr("width",$(".canvasBox").width());
     $("canvas").attr("height",$(".canvasBox").height());
 });
 
 $(function(){
-    //»ñÈ¡»­²¼ÒÔ¼°»­±Ê  »­²¼¿í»­²¼¸ß
+    //è·å–ç”»å¸ƒä»¥åŠç”»ç¬”  ç”»å¸ƒå®½ç”»å¸ƒé«˜
 
         var canvas = $("canvas")[0];
         var canW = $("canvas").attr("width");
@@ -17,7 +17,7 @@ $(function(){
         var squreBox = [];
         var squreW;
         var squreH;
-        //±³¾°Êı×é
+        //èƒŒæ™¯æ•°ç»„
         var bj=["image/cake_1.png","image/cake_2.png","image/cake_3.png","image/cake_4.png","image/cake_5.png","image/cake_6.png","image/cake_7.png"];
         var col = 7;
         var row = 7;
@@ -25,17 +25,17 @@ $(function(){
         var prevX ;
         var prevY ;
 
-    //»ñÈ¡Ã¿¸ö×ø±ê¶ÔÓ¦µÄĞÅÏ¢Éú³É¶ÔÏó£»
+    //è·å–æ¯ä¸ªåæ ‡å¯¹åº”çš„ä¿¡æ¯ç”Ÿæˆå¯¹è±¡ï¼›
         function makeSqure(x,y,n,l){
             var squre = {};
             squre.id = l;
             squre.x = x;
             squre.y = y;
-            squre.bj = n;       //±³¾°Í¼µÄÏÂ±ê
-            squre.state = 1 ;  // 1±íÊ¾ÏÔÊ¾×´Ì¬   0±íÊ¾ÏûÃğ×´Ì¬
+            squre.bj = n;       //èƒŒæ™¯å›¾çš„ä¸‹æ ‡
+            squre.state = 1 ;  // 1è¡¨ç¤ºæ˜¾ç¤ºçŠ¶æ€   0è¡¨ç¤ºæ¶ˆç­çŠ¶æ€
             return squre;
         }
-        //Éú³ÉÊı×é¶ÔÏó£»
+        //ç”Ÿæˆæ•°ç»„å¯¹è±¡ï¼›
         function makeSqureBox() {
             for (var i = 0; i < row; i++) {
                 for (var j = 0; j < col; j++) {
@@ -46,14 +46,14 @@ $(function(){
             }
             return squreBox;
         }
-        //¼ì²éÍêºóµÄ³õÊ¼»¯
+        //æ£€æŸ¥å®Œåçš„åˆå§‹åŒ–
         function init(){
             squreW = canW/col;
             squreH = canH/row;
             makeSqureBox();
             draw()
        }
-        //»­²¼Ïß
+        //ç”»å¸ƒçº¿
         function drawLine(){
             ctxt.strokeStyle="#fff";
             ctxt.lineWidth="2";
@@ -70,7 +70,7 @@ $(function(){
             }
             ctxt.closePath();
         }
-        //»­±³¾°Í¼
+        //ç”»èƒŒæ™¯å›¾
         function drawSqure(){
             $.each(squreBox,function (i,v) {
                 var x = v.x;
@@ -98,7 +98,7 @@ $(function(){
                 }
             })
         }
-        //°´±³¾°²»Í¬»­³öÍ¼°¸
+        //æŒ‰èƒŒæ™¯ä¸åŒç”»å‡ºå›¾æ¡ˆ
         function creat1(x,y){
             var img1 = new Image();
             img1.src="image/cake_1.png";
@@ -148,7 +148,7 @@ $(function(){
             ctxt.drawImage(img7,y * squreW,x * squreH,squreW,squreH);
         }
     }
-        //¶Ô»­²¼½øĞĞ»æÖÆ
+        //å¯¹ç”»å¸ƒè¿›è¡Œç»˜åˆ¶
         function draw(){
         ctxt.clearRect(0,0,canW,canH);
         drawLine();
@@ -185,7 +185,7 @@ $(function(){
             }
             draw();
         }
-        //¶Ô»­²¼½øĞĞ¼ì²â
+        //å¯¹ç”»å¸ƒè¿›è¡Œæ£€æµ‹
         function check(){
        $.each(squreBox,function(i,v){
            var squre = v;
@@ -209,7 +209,7 @@ $(function(){
         })
     }
         function checkSqure(v){
-       var leftArr = checkL(v);      //µ÷ÓÃÏò×ó¼ì²é
+       var leftArr = checkL(v);      //è°ƒç”¨å‘å·¦æ£€æŸ¥
        var rightArr = checkR(v);
        var topArr = checkT(v);
        var bottomArr = checkB(v);
@@ -234,7 +234,7 @@ $(function(){
             totalArr = topArr.concat(bottomArr)
         }
        return totalArr;
-    }//¼ì²éÄ³¸öĞ¡·½¿éÖÜÎ§ÊÇ·ñÓĞÏàËÆÍ¼°¸£»
+    }//æ£€æŸ¥æŸä¸ªå°æ–¹å—å‘¨å›´æ˜¯å¦æœ‰ç›¸ä¼¼å›¾æ¡ˆï¼›
         function checkL(v){
         var leftArr = [];
         var nowSqure = v;
@@ -302,39 +302,44 @@ $(function(){
         function drapSqure(){
 
         }
-        //³õÊ¼»¯Éú³ÉÏûÏûÀÖ£»
+        //åˆå§‹åŒ–ç”Ÿæˆæ¶ˆæ¶ˆä¹ï¼›
         function timer(){
             init();
             check();
         }
         timer();
 
-        $("canvas").on("click",function(e){
-            if(clickFlag == false){
-                clickFlag = true;
-                prevY = Math.floor(e.offsetX / squreW);
-                prevX = Math.floor(e.offsetY / squreH);
-            }else if(clickFlag){
-                var nowY = Math.floor(e.offsetX / squreW);
-                var nowX = Math.floor(e.offsetY / squreH);
-                if((nowY == prevY && Math.abs(nowX - prevX)==1) || (nowX == prevX && Math.abs(nowY - prevY)==1)){
-                    var prevSqure = $.grep(squreBox,function(v){
-                        return v.x == prevX && v.y == prevY;
-                    });
-                    var nowSqure = $.grep(squreBox,function(v){
-                        return v.x == nowX && v.y == nowY;
-                    });
-                    var temp = prevSqure[0].bj;
-                    var nowBj = nowSqure[0].bj;
-                    squreBox[prevSqure[0].id].bj = squreBox[nowSqure[0].id].bj;
-                    squreBox[nowSqure[0].id].bj = temp;
-                    draw();
-                    check();
-                    clickFlag = false;
-                }else{
-                    clickFlag = false;
-                }
-            }
+              $("canvas").on("touchstart",function(event){
+            var touchX = event.originalEvent.changedTouches[0].clientX
+            var touchY = event.originalEvent.changedTouches[0].clientY;
+            canLeft = $("canvas").offset().left;
+            canTop = $("canvas").offset().top;
+            prevY = Math.floor((touchX - canLeft)/squreW);
+            prevX = Math.floor((touchY - canTop)/squreH);
         })
-    
+        $("canvas").on("touchend",function(event){
+            var touchX = event.originalEvent.changedTouches[0].clientX
+            var touchY = event.originalEvent.changedTouches[0].clientY;
+            canLeft = $("canvas").offset().left;
+            canTop = $("canvas").offset().top;
+            var nowY = Math.floor((touchX - canLeft)/squreW);
+            var nowX = Math.floor((touchY - canTop)/squreH);
+            console.log(nowX,nowY,prevX,prevY)
+            if((nowY == prevY && Math.abs(nowX - prevX)==1) || (nowX == prevX && Math.abs(nowY - prevY)==1)){
+                            var prevSqure = $.grep(squreBox,function(v){
+                                return v.x == prevX && v.y == prevY;
+                            });
+                            var nowSqure = $.grep(squreBox,function(v){
+                                return v.x == nowX && v.y == nowY;
+                            });
+                            var temp = prevSqure[0].bj;
+                            var nowBj = nowSqure[0].bj;
+                            squreBox[prevSqure[0].id].bj = squreBox[nowSqure[0].id].bj;
+                            squreBox[nowSqure[0].id].bj = temp;
+                            draw();
+                        }else{
+                            prevX = "";
+                            prevY = "";
+                        }
+        })
 });
